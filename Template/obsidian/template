@@ -1,0 +1,31 @@
+# Template file for 'obsidian'
+pkgname=obsidian
+version=1.10.6
+revision=1
+archs="x86_64"
+depends="glibc libgcc fontconfig bash zlib hicolor-icon-theme fuse electron35"
+install=obsidian.install
+options=(!strip)
+source=("obsidian.sh"
+        "obsidian.desktop"
+        "LICENSE-Obsidian")
+short_desc="A powerful knowledge base that works on top of a local folder of plain text Markdown files"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="LicenseRef-Obsidian"
+homepage="https://obsidian.md"
+distfiles="https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz"
+checksum=1596c81d8645ff9f6506b5b3e1a6963250d9372ceb58eb037551e53bc1b16f72
+
+
+
+do_install(){
+	cd $FILESDIR
+	vinstall "$pkgname.sh" 755 /usr/bin
+	vinstall "$pkgname.desktop" 644 /usr/share/applications
+    cd $wrksrc/resources
+    vmkdir /usr/lib/obsidian
+    vinstall icon.png 644 /usr/share/pixmaps/ obsidian.png
+    find . -type d -exec install -d {,"$DESTDIR"/usr/lib/obsidian/}{} \;
+    find . -type f -exec install -D {,"$DESTDIR"/usr/lib/obsidian/}{} \;
+    vinstall "${FILESDIR}"/LICENSE-Obsidian 644 /usr/share/licenses/$pkgname/
+}

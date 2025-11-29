@@ -1,0 +1,41 @@
+# Template file for 'zen-browser'
+pkgname=zen-browser
+_pkgname=zen
+version=1.17.11
+revision=1
+archs="x86_64"
+depends="libXt dbus-glib gtk+3 mime-types nss freefont-ttf ffmpeg"
+short_desc="Performance oriented Firefox-based web browser"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="MPL-2.0"
+homepage="https://zen-browser.app/"
+options=(!strip)
+#changelog=""
+distfiles="https://github.com/zen-browser/desktop/releases/download/${version}b/zen.linux-x86_64.tar.xz"
+checksum=34d364e1a95a35d1858d7e093f86292ac81877c3f22bf404880f2fff438d09ca
+
+
+do_install(){
+	vmkdir usr/bin
+	vmkdir usr/share/applications
+	vmkdir opt/$pkgname
+	vmkdir opt/
+
+	vcopy $wrksrc/* opt/$pkgname/
+	vinstall ${FILESDIR}/${_pkgname}.desktop 644 "/usr/share/applications/"
+	vinstall  ${FILESDIR}/$pkgname.sh 755 "/usr/bin/$pkgname"
+
+	for i in 16x16 32x32 48x48 64x64 128x128; do
+		vmkdir /usr/share/icons/hicolor/$i/apps/
+		ln -sf /opt/${pkgname}/browser/chrome/icons/default/default${i/x*}.png \
+		"$DESTDIR"/usr/share/icons/hicolor/$i/apps/${pkgname}.png
+	done
+
+	ln -Tsf /usr/share/hunspell "$DESTDIR"/opt/${pkgname}/dictionaries
+	ln -Tsf /usr/share/hyphen "$DESTDIR"/opt/${pkgname}/hyphenation
+	ln -sf /usr/lib/libnssckbi.so "$DESTDIR"/opt/${pkgname}/libnssckbi.so
+
+	vmkdir /opt/$pkgname/distribution/
+	vinstall "$FILESDIR"/policies.json 644 /opt/$pkgname/distribution/
+
+}

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Zen Browser
+Exec=/opt/zen-browser/zen %U
+Terminal=false
+Type=Application
+Icon=zen-browser
+StartupWMClass=zen
+MimeType=x-scheme-handler/zen;
+Categories=Network;WebBrowser;

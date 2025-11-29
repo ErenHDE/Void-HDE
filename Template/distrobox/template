@@ -1,0 +1,23 @@
+# Template file for 'distrobox'
+pkgname=distrobox
+version=1.8.2.2
+revision=1
+archs="x86_64"
+depends="bash hicolor-icon-theme"
+opt_depends="
+docker:Docker support
+podman: Podman support"
+short_desc="Use any linux distribution inside your terminal."
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="GPL-3.0-only"
+homepage="https://distrobox.it"
+#changelog=""
+distfiles="https://github.com/89luca89/distrobox/archive/refs/tags/${version}.tar.gz"
+checksum=0c797689c0b8c7c7c9fa53d1f5550657af95e64d8b8bbdc0fe374f341ebf6cd0
+
+do_install(){
+	cd $wrksrc
+	./install -P "${DESTDIR}/usr"
+	find docs -name "*.md" -exec install -Dm 644 -t "${DESTDIR}/usr/share/doc/${pkgname}" {} +
+
+}

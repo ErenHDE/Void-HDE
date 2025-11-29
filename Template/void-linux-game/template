@@ -1,0 +1,45 @@
+# Template file for 'void-linux-game'
+pkgname=void-linux-game
+version=1
+revision=1
+archs="x86_64"
+metapackage=yes
+homepage="https://github.com/ErenHDE"
+
+depends="
+alsa-plugins
+giflib
+glfw
+alsa-plugins-32bit
+giflib-32bit
+gtk+3-32bit
+libjpeg-turbo-32bit
+libva-32bit
+libmpg123-32bit
+ocl-icd-32bit
+libopenal-32bit
+libjpeg-turbo
+libva
+libxslt
+mpg123
+libopenal
+protontricks
+wine
+winetricks
+gamescope
+lutris
+MangoHud
+steam
+mesa
+mesa-dri
+mesa-vulkan-radeon
+Vulkan-Tools
+gamemode
+glibc-32bit
+mesa-dri-32bit
+mesa-vulkan-radeon-32bit
+vulkan-loader
+vulkan-loader-32bit"
+short_desc="Void Linux Game application"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="GPL-3.0-or-later"

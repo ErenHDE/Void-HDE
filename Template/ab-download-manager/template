@@ -1,0 +1,36 @@
+# Template file for 'ab-download-manager'
+pkgname=ab-download-manager
+_pkgname=ABDownloadManager
+version=1.7.1
+revision=1
+archs="x86_64"
+depends="glibc java-runtime zlib alsa-lib libglvnd libXi freetype libXtst libXrender fontconfig libX11 libXext"
+short_desc="A Download Manager that speeds up your downloads"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="Apache-2.0"
+homepage="https://abdownloadmanager.com/"
+#changelog=""
+distfiles="https://github.com/amir1376/ab-download-manager/releases/download/v${version}/ABDownloadManager_${version}_linux_x64.tar.gz"
+options=(!debug)
+checksum=2535b9c131b37d21c09e98b7876d50e3ce48ee7a1a2a3c2b63833c1e00e48534
+
+do_install(){
+	vmkdir opt/
+	vmkdir usr/share/applications
+	vmkdir usr/share/pixmaps
+
+	vcopy "$wrksrc/lib/${_pkgname}.png" "/usr/share/pixmaps/${_pkgname}.png"
+	vcopy "$wrksrc" "/opt"
+	vinstall /dev/stdin 644 "/usr/share/applications/" com.abdownloadmanager.desktop <<EOF
+[Desktop Entry]
+Name=AB Download Manager
+Comment=Manage and organize your download files better than before
+GenericName=Download Manager
+Exec=/opt/${pkgname}-${version}/bin/${_pkgname}
+Icon=${_pkgname}
+Terminal=false
+Type=Application
+Categories=Network;Utility;
+StartupWMClass=com-abdownloadmanager-desktop-AppKt
+EOF
+}

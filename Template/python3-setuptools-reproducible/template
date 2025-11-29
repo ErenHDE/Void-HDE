@@ -1,0 +1,24 @@
+# Template file for 'python3-setuptools-reproducible'
+pkgname=python3-setuptools-reproducible
+version=0.1
+revision=1
+archs="x86_64"
+hostmakedepends="python3-build python3-installer python3-wheel"
+depends="python3-setuptools"
+short_desc="Extension of setuptools to support reproducible builds"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="MIT"
+homepage="https://github.com/wimglenn/setuptools-reproducible"
+distfiles="https://github.com/wimglenn/setuptools-reproducible/archive/refs/tags/v${version}.tar.gz"
+checksum=10688a31a300dba15e7420205752868a9c0a65e17763d7357f356e2de973e6aa
+
+do_build(){
+	cd $wrksrc
+	python -m build --wheel --no-isolation
+}
+
+do_install(){
+	cd $wrksrc
+	python -m installer --destdir="$DESTDIR" dist/*.whl
+    vinstall LICENSE 644 "/usr/share/licenses/${pkgname}/LICENSE"
+}

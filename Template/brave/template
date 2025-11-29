@@ -1,0 +1,26 @@
+# Template file for 'brave
+pkgname=brave
+version=1.84.141
+revision=1
+archs="x86_64"
+hostmakedepends="rpmextract tar"
+depends="alsa-lib nss freefont-ttf gtk+3"
+short_desc="Web browser that blocks ads and trackers by default"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="MLP-2.0 BSD custom:chromium"
+homepage="https://brave.com/"
+distfiles="https://github.com/brave/brave-browser/releases/download/v${version}/brave-browser-${version}-1.x86_64.rpm"
+checksum=8b351a1f5a4caea9b1489edcb885131ec5d1f85fa01829f54c060975b5472183
+
+do_install(){
+    vcopy $wrksrc/usr .
+    vcopy $wrksrc/opt .
+    vcopy $wrksrc/etc .
+    vmkdir "usr/bin"
+    ln -sf /opt/brave-browser/brave-browser "$DESTDIR/usr/bin/brave-browser"
+
+    for size in 16x16 24x24 32x32 48x48 64x64 128x128 256x256; do
+        install -Dm0644 "$DESTDIR/opt/brave.com/$pkgname/product_logo_${size/x*/}.png" \
+            "$DESTDIR/usr/share/icons/hicolor/$size/apps/brave-browser.png"
+    done
+}
