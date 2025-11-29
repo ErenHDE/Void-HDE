@@ -53,4 +53,5 @@ Clone the repository and copy the contents of the Template File to `void-package
 ```bash
  ./xbps-src pkg <package_name>
 ```
-
+### Note:
+I'm new to this so if you have any problems, feel free to let me know.
