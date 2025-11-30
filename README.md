@@ -30,8 +30,8 @@ This repository currently provides pre-built packages for:
 
 To add the repository to your Void Linux system:
 
-Create the file `/etc/xbps.d/20-librewolf.conf` with the following content:
-repository=https://github.com/index-0/librewolf-void/releases/latest/download/
+Create the file `/etc/xbps.d/20-librewolf.conf` with the following content:  
+"repository=https://github.com/index-0/librewolf-void/releases/latest/download/"
 
 ```bash
  xbps-install -S <packageName>
@@ -54,4 +54,7 @@ Clone the repository and copy the contents of the Template File to `void-package
  ./xbps-src pkg <package_name>
 ```
 ### Note:
-I'm new to this so if you have any problems, feel free to let me know.
+I'm new to this so if you have any problems, feel free to let me know.  
+As I said, this is a personal repository, I will try to add as many packages as possible that are compatible with x86_64. If you have any packages you want, contact me.  
+I will use this repo too :D  
+
