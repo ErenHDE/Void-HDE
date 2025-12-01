@@ -33,7 +33,7 @@ This repository currently provides pre-built packages for:
 To add the repository to your Void Linux system:
 
 Create the file `/etc/xbps.d/20-ErenHDE.conf` with the following content:  
-"repository=https://github.com/index-0/librewolf-void/releases/latest/download/"
+"repository=https://github.com/ErenHDE/Void-HDE/releases/download/v1.0/"
 
 ```bash
  xbps-install -S <packageName>
