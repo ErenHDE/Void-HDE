@@ -1,0 +1,64 @@
+# Template file for 'visual-studio-code'
+pkgname=visual-studio-code
+version=1.106.3
+revision=1
+archs="x86_64"
+depends="libxkbfile gnupg gtk+3 libsecret nss libgcc libnotify glibc lsof shared-mime-info xdg-utils alsa-lib"
+short_desc="Visual Studio Code (vscode): Editor for building and debugging modern web and cloud applications (official binary version)"
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="custom: commercial"
+homepage="https://code.visualstudio.com/"
+options=(!strip)
+distfiles="
+	https://raw.githubusercontent.com/microsoft/vscode/${version}/resources/linux/code.desktop>code-${version}.desktop.in
+	https://raw.githubusercontent.com/microsoft/vscode/${version}/resources/linux/code-url-handler.desktop>code-${version}-url-handler.desktop.in
+	https://raw.githubusercontent.com/microsoft/vscode/${version}/resources/linux/code-workspace.xml>code-${version}-workspace.xml.in
+	https://update.code.visualstudio.com/${version}/linux-x64/stable>code_${version}.tar.gz
+"
+checksum="
+	2f1782b30c4e040efff655fd9cf477930c5a0c81ddae27749b0cbb922c1d248e
+	c361efa7e02fcad759ed80d2fbab67877f33219b981578af6fffaf18aeb12d9b
+	3af748dd6578a1775e8eb7248ba397b7e11840df2ea6ee234ff76fee3dc306cf
+	57dbe7b9925a6b516205813a6e0818810403409877e0161f55198ce7678607ce
+"
+
+skip_extraction="code-${version}.desktop.in code-${version}-url-handler.desktop.in code-${version}-workspace.xml.in"
+
+_set_meta_info() {
+  sed 's/@@NAME_LONG@@/Visual Studio Code/g' "$1" |\
+  sed 's/@@NAME_SHORT@@/Code/g' |\
+  sed 's/@@NAME@@/code/g' |\
+  sed 's#@@EXEC@@#/usr/bin/code#g' |\
+  sed 's/@@ICON@@/visual-studio-code/g' |\
+  sed 's/@@URLPROTOCOL@@/vscode/g'
+}
+
+pre_configure(){
+	_set_meta_info
+	ls $XBPS_SRCDISTDIR/${pkgname}-${version}
+	_set_meta_info "$XBPS_SRCDISTDIR/${pkgname}-${version}/code-${version}.desktop.in" > "code.desktop"
+	_set_meta_info "$XBPS_SRCDISTDIR/${pkgname}-${version}/code-${version}-url-handler.desktop.in" > "code-url-handler.desktop"
+	_set_meta_info "$XBPS_SRCDISTDIR/${pkgname}-${version}/code-${version}-workspace.xml.in" > "code-workspace.xml"
+}
+
+do_install(){
+	vmkdir opt/${pkgname}
+	vmkdir usr/bin
+	vmkdir usr/share
+	vmkdir usr/share/applications
+    vmkdir usr/share/mime/packages
+    vmkdir usr/share/licenses/${pkgname}
+
+	vinstall "resources/app/LICENSE.rtf" 644 "/usr/share/licenses/${pkgname}/"
+	vinstall "resources/app/resources/linux/code.png" 644 "/usr/share/pixmaps/" ${pkgname}.png
+	vinstall "code.desktop" 644 "/usr/share/applications/"
+	vinstall "code-url-handler.desktop" 644 "/usr/share/applications/"
+	vinstall "code-workspace.xml" 644 "/usr/share/mime/packages/" ${pkgname}-workspace.xml
+	vinstall "resources/completions/bash/code" 644 "/usr/share/bash-completion/completions/"
+	vinstall "resources/completions/zsh/_code" 644 "/usr/share/zsh/site-functions/"
+
+	vcopy "${wrksrc}/*" "/opt/${pkgname}"
+
+	vinstall "${FILESDIR}/${pkgname}.sh" 755 "/usr/bin/" code
+
+}
