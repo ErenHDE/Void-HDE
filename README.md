@@ -23,6 +23,7 @@ This repository currently provides pre-built packages for:
 * `void-hybrid`
 * `void-linux-game`
 * `zen-browser`
+* `visual-studio-code`
 
 > More packages and updates will be added over time.
 
