@@ -2,9 +2,9 @@
 pkgname=librewolf
 version=145.0.2
 _number=2
-revision=1
+revision=2
 archs="x86_64"
-hostmakedepends="git"
+hostmakedepends="gnupg"
 depends="
 gtk+3
 libXt
@@ -43,12 +43,42 @@ short_desc="Community-maintained fork of Firefox, focused on privacy, security a
 maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
 license="MPL-2.0"
 homepage="https://librewolf.net/"
-distfiles="https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/${version}-${_number}/librewolf-${version}-${_number}-linux-x86_64-package.tar.xz"
-_uploadpath_sig_x86_64=${distfiles}.sig
-checksum=929839ca324db6d1f09849ae2d4605fb48e38a45b9adfde543ea0b56cf0f3a3f
+
+distfiles="
+	https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/${version}-${_number}/librewolf-${version}-${_number}-linux-x86_64-package.tar.xz
+	https://gitlab.com/api/v4/projects/44042130/packages/generic/librewolf/${version}-${_number}/librewolf-${version}-${_number}-linux-x86_64-package.tar.xz.sig
+	https://repo.librewolf.net/pubkey.gpg
+"
+
+
+checksum="
+	929839ca324db6d1f09849ae2d4605fb48e38a45b9adfde543ea0b56cf0f3a3f
+	2bbf11b4c48d533913b89adcc2ba0478f309887d0485ce9d92aa69e9b42c1789
+	9ced1a0ce0216bbd16cb95847584892ddb3642718530407aeb5b6b0642d3d24a
+	"
+
+skip_extraction="librewolf-${version}-${_number}-linux-x86_64-package.tar.xz.sig pubkey.gpg"
+
+do_verify() {
+    echo "Verifying LibreWolf GPG signature..."
+
+    export GNUPGHOME="$XBPS_SRCDISTDIR/librewolf-${version}/.gnupg_temp"
+    mkdir -p "$GNUPGHOME"
+    chmod 700 "$GNUPGHOME"
+
+    gpg --batch --no-tty --import "$XBPS_SRCDISTDIR/librewolf-${version}/pubkey.gpg"
+
+    gpg --batch --no-tty --verify \
+        "$XBPS_SRCDISTDIR/librewolf-${version}/librewolf-${version}-${_number}-linux-x86_64-package.tar.xz.sig" \
+        "$XBPS_SRCDISTDIR/librewolf-${version}/librewolf-${version}-${_number}-linux-x86_64-package.tar.xz"
+
+    rm -rf "$GNUPGHOME"
+}
 
 do_install(){
-	ls $wrksrc
+
+	do_verify
+
 	vmkdir /usr/lib/librewolf
 	vmkdir /usr/bin
 
