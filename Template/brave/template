@@ -1,6 +1,6 @@
 # Template file for 'brave
 pkgname=brave
-version=1.84.141
+version=1.85.111
 revision=1
 archs="x86_64"
 hostmakedepends="rpmextract tar"
