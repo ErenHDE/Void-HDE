@@ -22,8 +22,7 @@ do_install(){
 	'./usr/share/applications/freedownloadmanager.desktop'
 
 	vmkdir usr/share/icons/hicolor/256x256/apps
-	ln -sv "$wrksrc/opt/$pkgname/icon.png" \
-	"$DESTDIR/usr/share/icons/hicolor/256x256/apps/$pkgname.png"
+	vcopy opt/$pkgname/icon.png usr/share/icons/hicolor/256x256/apps/$pkgname.png
 
 	vsed -i '/^Exec=/a StartupWMClass=fdm' \
 	'./usr/share/applications/freedownloadmanager.desktop'
