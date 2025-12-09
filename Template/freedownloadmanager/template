@@ -8,6 +8,7 @@ short_desc="FDM is a powerful modern download accelerator and organizer."
 maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
 license="Freeware"
 homepage="https://www.freedownloadmanager.org/"
+#There were 3 errors in dependencies that I didn't think were necessary.
 noverifyrdeps=yes
 distfiles="https://files2.freedownloadmanager.org/6/latest/freedownloadmanager.deb"
 checksum=c659566a42715c4957275d2f9b2c17b6b73f1be38eec900bfbe31243363b7a09
