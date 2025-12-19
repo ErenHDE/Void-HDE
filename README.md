@@ -26,7 +26,7 @@ This repository currently provides pre-built packages for:
 * `visual-studio-code`
 * `FreeDownloadManager`
 * `unityhub`
-* `vscodium
+* `vscodium`
 
 > More packages and updates will be added over time.
 
