@@ -1,8 +1,9 @@
 # Template file for 'icoextract'
 pkgname=icoextract
 version=0.2.0
-revision=1
+revision=2
 archs="x86_64"
+build_style=python3-module
 hostmakedepends="python3-build python3-installer python3-setuptools python3-wheel"
 depends="python3-pefile"
 short_desc="Icon extractor for Windows PE files (.exe/.dll) with optional thumbnailer functionality"
@@ -12,12 +13,3 @@ homepage="https://github.com/jlu5/icoextract"
 distfiles="https://github.com/jlu5/icoextract/archive/refs/tags/${version}.tar.gz"
 checksum=1bbb9fcbd1e5cf584f2d41df83ceb901a9594110487a670d453dabcf453cfacc
 
-do_build(){
-	cd $wrksrc
-	python -m build --wheel --no-isolation
-}
-do_install(){
-	cd $wrksrc
-	python3 -m installer --destdir="${DESTDIR}" dist/*.whl
-	vinstall  exe-thumbnailer.thumbnailer 644 /usr/share/thumbnailers/exe-thumbnailer.thumbnailer
-}
