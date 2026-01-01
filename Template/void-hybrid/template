@@ -1,0 +1,17 @@
+# Template file for 'void-hybrid'
+pkgname=void-hybrid
+version=1.0
+revision=1
+depends="xtools"
+short_desc="A lightweight wrapper for xbps and xbps-src operations on Void Linux."
+maintainer="Eren Öztürk <erenozturkhde@gmail.com>"
+license="MIT"
+homepage="https://github.com/ErenHDE/void-hybrid"
+distfiles="https://github.com/ErenHDE/void-hybrid/releases/download/v1.0/void-hybrid.tar.gz"
+checksum=3e209f1621a474b1e4f89c1a52eb0b3be24dae122df719c17818f8b05fbae121
+
+do_install(){
+	vmkdir /usr/bin/
+	vcopy void /usr/bin/
+	chmod +x "$DESTDIR"/usr/bin/void
+}
