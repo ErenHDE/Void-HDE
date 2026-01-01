@@ -1,0 +1,14 @@
+# Template file for 'vkBasalt-cli'
+pkgname=vkBasalt-cli
+version=3.1.1
+revision=1
+build_style=python3-pep517
+hostmakedepends="python3-setuptools python3-wheel python3-build python3-installer"
+depends="python3"
+short_desc="vkBasalt-cli"
+maintainer="ErenHDE <191601574+ErenHDE@users.noreply.github.com>"
+license="LGPL-3.0-only AND GPL-3.0-only"
+homepage="https://gitlab.com/TheEvilSkeleton/vkbasalt-cli"
+fetch_method=git
+distfiles="https://gitlab.com/TheEvilSkeleton/vkbasalt-cli/-/archive/v${version}/vkbasalt-cli-v${version}.tar.gz"
+checksum=a2368f8bb5856b0cbb15d8a5c6010225f087143242f92a311c6a95cfb877f438
