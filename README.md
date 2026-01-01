@@ -10,6 +10,7 @@ It contains pre-built `.xbps` packages for popular applications, enabling easy i
 This repository currently provides pre-built packages for:
 
 * `ab-download-manager`
+* `bottles`
 * `brave`
 * `distrobox`
 * `heroic-games-launcher`
@@ -20,13 +21,13 @@ This repository currently provides pre-built packages for:
 * `patool`
 * `python3-fvs`
 * `python3-setuptools-reproducible`
-* `void-hybrid`
-* `void-linux-game`
-* `zen-browser`
-* `visual-studio-code`
-* `FreeDownloadManager`
 * `unityhub`
+* `visual-studio-code`
+* `void-linux-game`
+* `vkBasalt-cli`
+* `void-linux-game`
 * `vscodium`
+* `zen-browser`
 
 > More packages and updates will be added over time.
 
